@@ -130,7 +130,7 @@ if __name__ == '__main__':
     if sys.argv.count("-i") != 0:
         
         # cas 3-sat ou non
-        if sys.argv.count("-t") != 0:
+        if sys.argv.count("-t") == 0:
             solveur = SatSolveur(pb.clauses, pb.nb_variables)
         else:
             solveur = SatSolveur(pb3sat.clauses_simplifiees, pb3sat.nb_variables)
@@ -181,7 +181,7 @@ if __name__ == '__main__':
         
         # cas 3-sat
         if sys.argv.count("-t") == 0:
-             pb.sortieDimacs("temp")
+            pb.sortieDimacs("temp")
         else:
             pb3sat.sortieDimacs("temp")
         
