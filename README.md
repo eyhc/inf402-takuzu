@@ -7,7 +7,7 @@ Projet d'INF402 - resolution d'une grille de Takuzu avec un SAT-solveur. Python.
 
 Le rapport sur lequel se base ce programme est disponible à l'adresse suivante :
 
-[https://fr.overleaf.com/read/pkyjqgcshzjd](https://fr.overleaf.com/read/pkyjqgcshzjd)
+[https://drive.google.com/file/d/159KaUjrVdSuMRBo3gCenMJelV8Q8wTzX/view?usp=sharing](https://drive.google.com/file/d/159KaUjrVdSuMRBo3gCenMJelV8Q8wTzX/view?usp=sharing)
 
 
 ## Execution du programme
