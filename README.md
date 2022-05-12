@@ -38,7 +38,7 @@ Pour éxécuter il faut ensuite entrer :
 python3 main.py [fichier.tkz] [-s] [-i] [-h]
 ```
 
-* L'option `-h` __(Help)__ permet d'avoir quelques éléments d'inforamtions.
+* L'option `-h` _(Help)_ permet d'avoir quelques éléments d'inforamtions.
 * L'option `-s`_(avec Sortie)_ permet d'écrire les resultat de chaque operation dans des fichiers ;
 * L'option `-i`_(Interne)_ permet d'utiliser le solveur 
 	
