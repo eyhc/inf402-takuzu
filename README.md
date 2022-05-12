@@ -37,7 +37,7 @@ Pour éxécuter il faut ensuite entrer :
 python3 main.py [fichier.tkz] [-s] [-i] [-h]
 ```
 
-* L'option `-h` _(Help)_ permet d'avoir quelques éléments d'inforamtions.
+* L'option `-h` _(help)_ permet d'avoir quelques éléments d'inforamtions.
 * L'option `-s`_(avec Sortie)_ permet d'écrire les resultat de chaque operation dans des fichiers ;
 * L'option `-i`_(Interne)_ permet d'utiliser le solveur 
 	
@@ -53,7 +53,7 @@ Il y  a dans ce projet 6 modules principaux :
 1. La classe `Grille` qui définit une grille de jeu plus ou moins remplies
 2. La librairie `es_dimacs` qui contient les fonctions d'entrée/sortie dans des fichiers dimacs.
 3. Le module `pbmodele` permet à partir d'une grille de modéliser un problème sous forme de clauses qu'on peut écrire dans un fichier dimacs.
-4. Le module `satsolveur` qui permet de trouver un modele d'un ensemble de 3-clauses.
+4. Le module `satsolveur` qui permet de trouver un modele d'un ensemble de clauses.
 5. Un programme principal qui permet de trouver la solution (si possible) d'un problème saisi par l'utilisateur (cf ci-dessus).
 
 ### Modules de test
