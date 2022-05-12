@@ -14,7 +14,6 @@ http://reasoning.cs.ucla.edu/rsat/download.php
 import sys
 import os
 from pbmodele import *
-from sat_3sat import *
 from satsolveur import *
 from grille import *
 
@@ -25,6 +24,13 @@ from grille import *
 
 
 if __name__ == '__main__':
+    if sys.argv.count("-h") != 0:
+        print("Usage : python3 main.py [fichier.tkz] [-s] [-i]")
+        print("Avec  :\n" + 
+              "        -s : permet d'écrire les resultat de chaque operation dans des fichiers\n" +
+              "        -i : permet d'utiliser le solveur du projet. Sinon veuillez à ce que rsat soit dans le path.")
+        sys.exit(0)
+    
     ECRIRE_SORTIE = False
     # Ecrire dans des fichiers
     if sys.argv.count("-s") != 0:
@@ -38,7 +44,7 @@ if __name__ == '__main__':
     
     # On construit la grille soit par argument soit par ligne de console
     if (len(sys.argv) > 1 and sys.argv[1] != "-s"
-        and sys.argv[1] != "-i" and sys.argv[1] != "-t"):
+        and sys.argv[1] != "-i"):
         g.construireGrilleFichier(sys.argv[1])
         doc_name = sys.argv[1]
         doc_name = doc_name.replace(".tkz", "")
@@ -91,31 +97,6 @@ if __name__ == '__main__':
     
     ##############################
     #                            #
-    #     PARTIE CONVERSION      #
-    #      DE SAT VERS 3-SAT     #
-    #         EN OPTION          #
-    #         ---------          #
-    #                            #
-    ##############################
-    
-    if sys.argv.count("-t") != 0:
-        print("\nClauses SAT --> Clauses 3-SAT   --> ", doc_name, "-3.dmcs", sep="")
-        
-        # creation de l'instance de conversion
-        pb3sat = Sat3SAT(pb.clauses, pb.nb_variables)
-        
-        # on effectue le passage
-        pb3sat.conversion()
-        print("Nombre de variables : ", pb3sat.nb_variables)
-        print("Nombre de clauses   : ", len(pb3sat.clauses_simplifiees))
-        
-        # on écrit le resultat si demandé
-        if ECRIRE_SORTIE:
-            pb3sat.sortieDimacs(doc_name + "-3.dmcs")
-    
-    
-    ##############################
-    #                            #
     #     PARTIE RESOLUTION      #
     #                            #
     ##############################
@@ -129,11 +110,7 @@ if __name__ == '__main__':
     ##############################
     if sys.argv.count("-i") != 0:
         
-        # cas 3-sat ou non
-        if sys.argv.count("-t") == 0:
-            solveur = SatSolveur(pb.clauses, pb.nb_variables)
-        else:
-            solveur = SatSolveur(pb3sat.clauses_simplifiees, pb3sat.nb_variables)
+        solveur = SatSolveur(pb.clauses, pb.nb_variables)
         
         # On lance la resolution au plus 20 fois
         i = 0
@@ -143,7 +120,7 @@ if __name__ == '__main__':
             i += 1
         
         # On ecrit le nb de tentatives
-        print("Nombre de tentatives : ", i+1)
+        print("Nombre de tentatives : ", i)
         
         # On regarde si c'est modele ou pas
         if solveur.estModele():  # Si oui on affiche le résultat
@@ -176,14 +153,8 @@ if __name__ == '__main__':
     #       EXTERNE : RSAT       #
     ##############################
     else:
-        
         # On écrit le fichier dans un fichier temp
-        
-        # cas 3-sat
-        if sys.argv.count("-t") == 0:
-            pb.sortieDimacs("temp")
-        else:
-            pb3sat.sortieDimacs("temp")
+        pb.sortieDimacs("temp")
         
         # On lance le solveur et on écrit la solution dans temp2
         os.system("rsat temp -s > temp2")
@@ -206,4 +177,4 @@ if __name__ == '__main__':
         # On sauvegarde si demandé
         if ECRIRE_SORTIE:
             es_dimacs.ecrireSAT(doc_name + ".sol", gs.cases)
-
+        

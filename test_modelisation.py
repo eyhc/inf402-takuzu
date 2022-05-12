@@ -64,9 +64,11 @@ if __name__ == '__main__':
     print("Nombre de clauses réel : ", len(pb.clauses))
     
     print("---------------------------------------------------------------")
+    print("Test : Lecture d'un fichier")
     pb.sortieDimacs("toto.dmcs")
     u = es_dimacs.lireCNFDimacs("toto.dmcs")
     print(u[0])
+    print(len(u[1]))
     print(u[1][8])
     print(u[1][10])   # 32 clauses pour la première
     print(u[1][36])

@@ -24,22 +24,22 @@ Vous avez deux possibilités pour résoudre une grille de Takuzu :
 1. Ecrire les données du problème dans un fichier (.tkz) respectant la structure suivante
 
 ```
-largeur_de_la_grille
-nombre_zeros (nz)
-nombres_uns  (nu)
-suivit de nz+nu coordonnées de la forme i,j
-...
+largeur_de_la_grille(n)
+n lignes comportant n symboles qui sont, soit '0' soit '1' soit '.'
+le point représente l'absence de contraintes
 ```
 
-2. Au clavier sur le même principe que ci-dessus.
+Pour des exemples voir le dossier tests.
+
+2. Au clavier (peu pratique) : on demande le nombre de zeros et de uns puis les coordoonées de tous les zeros puis ceux de tous les uns.
 
 Pour éxécuter il faut ensuite entrer :
 ```
-python3 main.py [fichier.tkz] [-s] [-t] [-i]
+python3 main.py [fichier.tkz] [-s] [-i] [-h]
 ```
 
+* L'option `-h` __(Help)__ permet d'avoir quelques éléments d'inforamtions.
 * L'option `-s`_(avec Sortie)_ permet d'écrire les resultat de chaque operation dans des fichiers ;
-* L'option `-t`_(Trois sat)_ permet d'effectuer la conversion sat vers trois sat et sera utilisé ensuite dans le solveur ;
 * L'option `-i`_(Interne)_ permet d'utiliser le solveur 
 	
   **Attention** : pour pouvoir utiliser le programme correctement, il faut que le programme `rsat` ce trouve dans le 'PATH'. Merci de l'installer.
@@ -53,11 +53,10 @@ python3 main.py [fichier.tkz] [-s] [-t] [-i]
 Il y  a dans ce projet 6 modules principaux :
 1. La classe `Grille` qui définit une grille de jeu plus ou moins remplies
 2. La librairie `es_dimacs` qui contient les fonctions d'entrée/sortie dans des fichiers dimacs.
-2. Le module `pbmodele` permet à partir d'une grille de modéliser un problème sous forme de clauses qu'on peut écrire dans un fichier dimacs.
-3. Le module `sat_3sat` qui permet de convertir un ensemble de clauses en ensemble de clauses à trois littéraux.
+3. Le module `pbmodele` permet à partir d'une grille de modéliser un problème sous forme de clauses qu'on peut écrire dans un fichier dimacs.
 4. Le module `satsolveur` qui permet de trouver un modele d'un ensemble de 3-clauses.
 5. Un programme principal qui permet de trouver la solution (si possible) d'un problème saisi par l'utilisateur (cf ci-dessus).
 
 ### Modules de test
 
-Ce projet comporte 3 modules de tests : trois programmes qui testent séparement chaque fonction des modules `pbmodele`, `sat_3sat` et `satsolveur`.
+Ce projet comporte 2 programmes qui testent séparement chaque fonction des modules `pbmodele`, `satsolveur`.

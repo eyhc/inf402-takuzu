@@ -38,7 +38,10 @@ class Grille:
         for i in range(nu+nz):
             # On récupère les deux coordonnées et on ajoute
             cp = input()
-            self.ajouterCase(cp, i < nz)
+            cp = re.findall("[0-9]+", cp)
+            # On traite les cas des zeros et uns
+            num = self.numeroCase(int(cp[0]), int(cp[1]))
+            self.ajouterCase(num, i >= nz)
     
     
     """
@@ -58,17 +61,13 @@ class Grille:
         # Taille de la grille
         self.taille = int(f.readline())
         
-        # On recupère nz et nu
-        nz = int(f.readline())
-        nu = int(f.readline())
-        
         # On traite chaque case
-        for i in range(nz+nu):
-            # On lit et on ajoute la case
+        for i in range(self.taille):
             cp = f.readline()
-            self.ajouterCase(cp, i < nz)
+            for j in range(self.taille):
+                if cp[j] == '0' or cp[j] == '1':
+                    self.ajouterCase(self.numeroCase(i+1, j+1), int(cp[j]))
         
-        # On 
         f.close()
 
     """
@@ -100,16 +99,13 @@ class Grille:
     """
         Ajoute un un ou un zero dans la case représenté par la chaine "i,j"
     """
-    def ajouterCase(self, chaine, zero):
-        # on recupère les deux morceaux avec une expression regulière
-        cp = re.findall("[0-9]+", chaine)
+    def ajouterCase(self, numero, zero):
         # On traite les cas des zeros et uns
-        v = self.numeroCase(int(cp[0]), int(cp[1]))
-        if v <= self.taille * self.taille:
-            if zero:
-                self.cases.append(-v)
+        if numero <= self.taille * self.taille:
+            if zero == 0:
+                self.cases.append(-numero)
             else:
-                self.cases.append(v)
+                self.cases.append(numero)
     
     
     """
