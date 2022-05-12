@@ -45,10 +45,10 @@ class Sat3SAT:
             # Clause de taille 1
             if k == 1:
                 # on ajoute deux variables
-                y1 = 1
-                y2 = 2
-                if self.nb_variables < 2:
-                    self.nb_variables = 2
+                y1 = self.nb_variables
+                y2 = y1 + 1
+                
+                self.nb_variables += 2
                 
                 # on ajoute les quatre clauses équivalentes (cf exo 51)
                 self.clauses_simplifiees.append([clause[0], y1, y2])
@@ -59,7 +59,8 @@ class Sat3SAT:
             # Clause de taille 2
             elif k == 2:
                 # on ajoute une variable
-                y1 = 1
+                y1 = self.nb_variables
+                self.nb_variables += 1
                 
                 # on ajoute les deux clauses équivalentes (cf exo 51)
                 self.clauses_simplifiees.append([clause[0], clause[1], y1])
@@ -73,7 +74,7 @@ class Sat3SAT:
             # Clause de taille supérieure à 3 : aïe !
             else:
                 # premiere variable suplementaire
-                yi = 1
+                yi = self.nb_variables
                 
                 # premiere 3-clause : z1 + z2 + -y1 (cf exo 51) 
                 self.clauses_simplifiees.append([clause[0], clause[1], yi])
@@ -91,8 +92,7 @@ class Sat3SAT:
                     [-yi, clause[k-2], clause[k-1]]
                 )
                 
-                if self.nb_variables < k-3:
-                    self.nb_variables = k-3     # on a k-3 variables au total
+                self.nb_variables += k-3     # on a k-3 variables de plus
                 
         
         
