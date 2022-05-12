@@ -25,8 +25,7 @@ Vous avez deux possibilités pour résoudre une grille de Takuzu :
 
 ```
 largeur_de_la_grille(n)
-n lignes comportant n symboles qui sont, soit '0' soit '1' soit '.'
-le point représente l'absence de contraintes
+n lignes comportant n symboles qui sont, soit '0' soit '1' soit '.' (le point représente l'absence de contraintes).
 ```
 
 Pour des exemples voir le dossier tests.
